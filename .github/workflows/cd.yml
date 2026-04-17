@@ -41,14 +41,13 @@ jobs:
           tags: |
             ${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.tag }}
 
-      - uses: mikefarah/yq@v4.45.1
-
       - name: Update Helm values (image)
+        uses: mikefarah/yq@v4.45.1
         env:
           IMAGE: ${{ steps.vars.outputs.image }}
           TAG: ${{ steps.vars.outputs.tag }}
-        run: |
-          yq -i '.image.repository = strenv(IMAGE) | .image.tag = strenv(TAG)' helm/ai-studio/values.yaml
+        with:
+          cmd: yq -i '.image.repository = strenv(IMAGE) | .image.tag = strenv(TAG)' helm/ai-studio/values.yaml
 
       - name: Commit and push Helm bump
         run: |
