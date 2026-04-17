@@ -37,17 +37,21 @@ jobs:
       - name: Install dependencies
         run: uv sync --group dev
 
+      - name: Install ChatOps dependencies
+        if: ${{ hashFiles('chatops/requirements.txt') != '' }}
+        run: uv pip install -r chatops/requirements.txt
+
       - name: Format check
-        run: uv run ruff format --check ./src
+        run: uv run ruff format --check ./src ./chatops
 
       - name: Lint
-        run: uv run ruff check ./src
+        run: uv run ruff check ./src ./chatops
 
       - name: Type check
         run: uv run mypy ./src
 
       - name: Syntax check
-        run: uv run python -m compileall -q ./src
+        run: uv run python -m compileall -q ./src ./chatops
 
   helm:
     name: Helm checks
