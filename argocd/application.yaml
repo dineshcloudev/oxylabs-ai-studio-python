@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/<your-username>/oxylabs-ai-studio-py
+    repoURL: https://github.com/dineshcloudev/oxylabs-ai-studio-python.git
     targetRevision: HEAD
     path: helm/ai-studio
 
