@@ -106,6 +106,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Update Helm values (image)
         env:
           IMAGE: ${{ needs.docker.outputs.image }}
