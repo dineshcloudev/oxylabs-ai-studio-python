@@ -7,7 +7,9 @@ replicaCount: 2
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: dineshvsu213/ai-studio
+  # Default repository for CD workflow (GitHub Container Registry).
+  # If you push to DockerHub instead, override this value.
+  repository: ghcr.io/dineshcloudev/oxylabs-ai-studio-python
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
