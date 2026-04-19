@@ -36,8 +36,7 @@ def _verify_slack_signature() -> None:
     body = request.get_data(cache=True, as_text=False) or b""
     base_string = f"v0:{timestamp}:".encode() + body
     expected = (
-        "v0="
-        + hmac.new(signing_secret.encode(), base_string, sha256).hexdigest()
+        "v0=" + hmac.new(signing_secret.encode(), base_string, sha256).hexdigest()
     )
     if not hmac.compare_digest(expected, signature):
         abort(401)
@@ -73,6 +72,7 @@ def slack_bot() -> str:
         return "Search feature coming soon 🔍"
 
     return "Unknown command"
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
